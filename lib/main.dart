@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/homepage.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -8,8 +9,7 @@ void main() {
       child: MaterialApp(debugShowCheckedModeBanner: false, home: MainHome())));
 }
 
-class MainProvider extends ChangeNotifier {
-}
+class MainProvider extends ChangeNotifier {}
 
 class MainHome extends StatelessWidget {
   @override
@@ -24,8 +24,10 @@ class MainHome extends StatelessWidget {
               child: Image.asset(
                 'lib/images/start1.jpg',
                 fit: BoxFit.fill,
+                color: Color.fromRGBO(156, 156, 156, 1),
+                colorBlendMode: BlendMode.modulate,
+                width: double.infinity,
                 height: 900,
-                width: 600,
               ),
             ),
 
@@ -57,35 +59,52 @@ class MainHome extends StatelessWidget {
 
             // content
             Container(
-              margin: const EdgeInsets.only(top: 700, left: 30, right: 30),
-              child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.white, width: 1),
-                      minimumSize: Size(200, 45)),
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Login()));
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Get stated',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                        ),
+              margin: const EdgeInsets.only(top: 550, left: 80, right: 80),
+              child: Column(
+                children: [
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      backgroundColor: Color.fromRGBO(156, 156, 156, 0.8),
+                      minimumSize: Size(200, 45),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => HomePage()));
+                    },
+                    child: const Text(
+                      'Get Stated',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
                       ),
-                      Row(
-                        children: const[
-                          Icon(Icons.navigate_next, color: Colors.white),
-                          Icon(Icons.navigate_next, color: Colors.white60),
-                          Icon(Icons.navigate_next, color: Colors.white54)
-                        ],
-                      )
-                    ],
-                  )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      backgroundColor: Colors.white,
+                      minimumSize: Size(200, 45),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => Login()));
+                    },
+                    child: const Text(
+                      'Sign in',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromRGBO(124, 252, 0, 0.7),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -93,5 +112,3 @@ class MainHome extends StatelessWidget {
     );
   }
 }
-
-

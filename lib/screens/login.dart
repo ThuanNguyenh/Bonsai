@@ -39,6 +39,7 @@ class Login extends StatelessWidget {
                 const TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(18))
                         // borderSide: BorderSide(color: Colors.blue, width: .5)
                         ),
                     labelText: 'Email',
@@ -52,7 +53,9 @@ class Login extends StatelessWidget {
                 const TextField(
                   obscureText: true,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18))
+                    ),
                     labelText: 'Password',
                   ),
                 ),
@@ -62,7 +65,14 @@ class Login extends StatelessWidget {
                 ),
 
                 ElevatedButton(
-                  style: OutlinedButton.styleFrom(minimumSize: Size(320, 50)),
+                  // style: OutlinedButton.styleFrom(minimumSize: Size(320, 50)),
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                            ),
+                        )
+                    ),
                   onPressed: () {
                     Navigator.push(
                         context, MaterialPageRoute(builder: (_) => HomePage()));

@@ -48,36 +48,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// class HomePage extends StatelessWidget {
-//   int _page = 1;
-//   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//
-//     return Scaffold(
-//         bottomNavigationBar: CurvedNavigationBar(
-//           height: 50,
-//           key: _bottomNavigationKey,
-//           items: const <Widget>[
-//             Icon(Icons.shopping_cart, size: 30),
-//             Icon(Icons.home, size: 30),
-//             Icon(Icons.person, size: 30),
-//
-//           ],
-//
-//           // xu ly khi nhan vao muc
-//           onTap: (index) {
-//             (() {
-//               _page = index;
-//             });
-//           },
-//         ),
-//         body: Container(
-//           color: Colors.blueAccent,
-//         ));
-//   }
-// }

@@ -1,3 +1,5 @@
+import 'package:bonsai_shop/model/post.dart';
+import 'package:bonsai_shop/network/network_request.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsai_shop/screens/login.dart';
 
@@ -15,14 +17,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<CardItem> items = [
-    CardItem(image: "lib/image/start2.png"),
-    CardItem(image: "lib/image/start2.png"),
-    CardItem(image: "lib/image/start2.png"),
-    CardItem(image: "lib/image/start2.png"),
-    CardItem(image: "lib/image/start2.png"),
-    CardItem(image: "lib/image/start2.png"),
-  ];
+  // get index => 3;
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +73,7 @@ class _HomeState extends State<Home> {
                       borderSide: BorderSide.none,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     )),
               ),
@@ -89,38 +85,115 @@ class _HomeState extends State<Home> {
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
-                      mainAxisExtent: 250,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
+                      mainAxisExtent: 300,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                     ),
-                    itemCount: 10,
-                    itemBuilder: (context, index) => buildCard()),
+                    itemCount: postData.length,
+                    itemBuilder: (context, index) {
+                      return  Container(
+                        // color: Colors.white,
+                        alignment: Alignment.center,
+                        // height: 220,
+                        decoration: BoxDecoration(
+                            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ), // Image border
+                                        child: SizedBox.fromSize(
+                                          size: Size.square(170), // Image radius
+                                          child: Image.network(
+                                            '${postData[index].image}',
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 130, top: 10),
+                                      child:const Icon(
+                                        Icons.favorite,
+                                        color: Colors.greenAccent,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(left: 10, top: 10),
+                                child: Text('${postData[index].name}',
+                                  style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 10, top: 5),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.location_on, size: 20, color: Colors.blue,),
+                                    Text('${postData[index].address}',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 15
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text('\$ ${postData[index].price}',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w800
+                                      ),),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: ElevatedButton(onPressed: () {  },
+                                      child: Icon(Icons.add_shopping_cart),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.greenAccent,
+                                        minimumSize: Size(0, 30),
+                                      ),
+
+                                    ),
+                                  )
+                                ],
+                              )
+                            ]),
+                      );
+                    }),
               )
             ],
           )),
     );
   }
 
-  Widget buildCard() => Container(
-        // color: Colors.white,
-        alignment: Alignment.center,
-        height: 250,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15)
-        ),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)), // Image border
-              child: SizedBox.fromSize(
-                size: Size.fromHeight(250), // Image radius
-                child: Image.asset('lib/images/start1.jpg', fit: BoxFit.cover),
-              ),
-            )
+  List<Post> postData = [];
 
-
-          ]
-        ),
-      );
+ @override
+ void initState() {
+   super.initState();
+   NetworkRequest.fetchPosts().then((dataFromServer) {
+     setState(() {
+       postData = dataFromServer;
+     });
+   });
+ }
 }
