@@ -5,8 +5,16 @@ import 'package:bonsai_shop/screens/signup.dart';
 import 'package:bonsai_shop/homepage.dart';
 import 'package:bonsai_shop/screens/password.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _Login();
+}
+
+class _Login extends State<Login> {
+  // show the password or not
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +58,22 @@ class Login extends StatelessWidget {
                   height: 20,
                 ),
 
-                const TextField(
-                  obscureText: true,
+                TextField(
+                  obscureText: _isObscure,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(18))
                     ),
                     labelText: 'Password',
+                      suffixIcon: IconButton(
+                          icon: Icon(
+                              _isObscure ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          }),
+
                   ),
                 ),
 
@@ -86,7 +103,7 @@ class Login extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (_) => PassWord()));
-                }, child: Text('Forgot your password?',
+                }, child: const Text('Forgot your password?',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),)),
 
                 const SizedBox(

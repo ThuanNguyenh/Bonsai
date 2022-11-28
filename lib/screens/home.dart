@@ -3,11 +3,11 @@ import 'package:bonsai_shop/network/network_request.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsai_shop/screens/login.dart';
 
-class CardItem {
-  final String image;
-
-  const CardItem({required this.image});
-}
+// class CardItem {
+//   final String image;
+//
+//   const CardItem({required this.image});
+// }
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,7 +17,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // get index => 3;
+  List<Post> postData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchPosts().then((dataFromServer) {
+      setState(() {
+        postData = dataFromServer;
+      });
+    });
+  }
+
 
 
   @override
@@ -30,6 +41,11 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: const Text('Bonsai Shop'),
         actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: CustomSearch());
+              },
+              icon: const Icon(Icons.search)),
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -80,6 +96,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 20,
               ),
+
               Expanded(
                 child: GridView.builder(
                     gridDelegate:
@@ -91,12 +108,13 @@ class _HomeState extends State<Home> {
                     ),
                     itemCount: postData.length,
                     itemBuilder: (context, index) {
-                      return  Container(
+                      return Container(
                         // color: Colors.white,
                         alignment: Alignment.center,
                         // height: 220,
                         decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,13 +123,15 @@ class _HomeState extends State<Home> {
                                 child: Stack(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+                                      margin: EdgeInsets.only(
+                                          top: 5, left: 5, right: 5),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(10),
                                         ), // Image border
                                         child: SizedBox.fromSize(
-                                          size: Size.square(170), // Image radius
+                                          size:
+                                              Size.square(170), // Image radius
                                           child: Image.network(
                                             '${postData[index].image}',
                                             width: double.infinity,
@@ -121,8 +141,9 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(left: 130, top: 10),
-                                      child:const Icon(
+                                      margin:
+                                          EdgeInsets.only(left: 130, top: 10),
+                                      child: const Icon(
                                         Icons.favorite,
                                         color: Colors.greenAccent,
                                         size: 30,
@@ -131,47 +152,55 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
-
                               Container(
                                 margin: EdgeInsets.only(left: 10, top: 10),
-                                child: Text('${postData[index].name}',
-                                  style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
+                                child: Text(
+                                  '${postData[index].name}',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800),
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.only(left: 10, top: 5),
                                 child: Row(
                                   children: [
-                                    Icon(Icons.location_on, size: 20, color: Colors.blue,),
-                                    Text('${postData[index].address}',
+                                    Icon(
+                                      Icons.location_on,
+                                      size: 20,
+                                      color: Colors.blue,
+                                    ),
+                                    Text(
+                                      '${postData[index].address}',
                                       style: TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15
-                                      ),
+                                          color: Colors.blue, fontSize: 15),
                                     )
                                   ],
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(left: 10),
-                                    child: Text('\$ ${postData[index].price}',
+                                    child: Text(
+                                      '\$ ${postData[index].price}',
                                       style: TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w800
-                                      ),),
+                                          fontWeight: FontWeight.w800),
+                                    ),
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(right: 10),
-                                    child: ElevatedButton(onPressed: () {  },
+                                    child: ElevatedButton(
+                                      onPressed: () {},
                                       child: Icon(Icons.add_shopping_cart),
                                       style: ElevatedButton.styleFrom(
                                         primary: Colors.greenAccent,
                                         minimumSize: Size(0, 30),
                                       ),
-
                                     ),
                                   )
                                 ],
@@ -184,16 +213,57 @@ class _HomeState extends State<Home> {
           )),
     );
   }
-
-  List<Post> postData = [];
-
- @override
- void initState() {
-   super.initState();
-   NetworkRequest.fetchPosts().then((dataFromServer) {
-     setState(() {
-       postData = dataFromServer;
-     });
-   });
- }
 }
+
+class CustomSearch extends SearchDelegate {
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: (){
+            query = '';
+          },
+          icon: const Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: (){
+        close(context, null);
+      },
+      icon: const Icon(Icons.arrow_back),);
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    throw UnimplementedError();
+  }
+
+
+  // goi y data
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> postData = [];
+
+    for (var item in postData) {
+      if(item.toLowerCase().contains(query.toLowerCase())){
+        postData.add(item);
+      }
+    }
+    return ListView.builder(
+      itemCount: postData.length,
+        itemBuilder: (context, index) {
+          var result = postData[index];
+          return ListTile(
+            title: Text(result),
+          );
+        }
+    );
+  }
+}
+
+
