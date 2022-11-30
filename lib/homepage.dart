@@ -1,8 +1,15 @@
+import 'package:bonsai_shop/model/post.dart';
+import 'package:bonsai_shop/model/post.dart';
+import 'package:bonsai_shop/network/data.dart';
+import 'package:bonsai_shop/screens/AllProducts.dart';
+import 'package:bonsai_shop/screens/Blogs.dart';
+import 'package:bonsai_shop/screens/Orders.dart';
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:bonsai_shop/screens/home.dart';
 import 'package:bonsai_shop/screens/cart.dart';
 import 'package:bonsai_shop/screens/profile.dart';
+import 'package:bonsai_shop/model/post.dart';
+import 'model/post.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,11 +20,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List Screens = [
-    Cart(),
-    Home(),
+    Home(data: data.last),
+    AllProducts(),
+    Orders(),
+    Blogs(),
     Profile(),
   ];
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   //State class
   // int _page = 0;
@@ -27,16 +36,32 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: Colors.white,
-        height: 50,
-        index: _selectedIndex,
-        backgroundColor: Colors.transparent,
-        items:  <Widget>[
-          Icon(Icons.shopping_bag_rounded, size: 30,color: Colors.lightGreen.shade900),
-          Icon(Icons.home, size: 30, color: Colors.lightGreen.shade900,),
-          Icon(Icons.favorite, size: 30, color: Colors.lightGreen.shade900,),
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.grey,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.storefront),
+            label: 'Cửa hàng',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.card_travel),
+            label: 'Sản phẩm',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.document_scanner),
+            label: 'Đơn hàng',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.image),
+            label: 'Bài viết',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Tài Khoản',
+          ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.lightGreen[900],
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
@@ -47,4 +72,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

@@ -1,27 +1,38 @@
 class Post {
-  String? name;
-  String? image;
-  int? price;
-  String? address;
-  String? id;
+  final String name;
+  final String image;
+  final int price;
+  final String address;
+  final String id;
 
-  Post({this.name, this.image, this.price, this.address, this.id});
+  const Post({
+      required this.name,
+      required this.image,
+      required this.price,
+      required this.address,
+      required this.id
+  });
 
-  Post.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    image = json['image'];
-    price = json['price'];
-    address = json['address'];
-    id = json['id'];
-  }
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
+        name: json['name'],
+        image: json['image'],
+        price: json['price'],
+        address: json['address'],
+        id: json['id'],
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['price'] = this.price;
-    data['address'] = this.address;
-    data['id'] = this.id;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+   'name': name,
+    'image': image,
+    'price': price,
+    'address': address,
+    'id': id
+  };
+  Post copy() => Post(
+      name: name,
+      image: image,
+      price: price,
+      address: address,
+      id: id
+  );
 }

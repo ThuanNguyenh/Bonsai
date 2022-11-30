@@ -59,7 +59,7 @@ class MainHome extends StatelessWidget {
 
             // content
             Container(
-              margin: const EdgeInsets.only(top: 550, left: 80, right: 80),
+              margin: const EdgeInsets.only(top: 550, left: 100, right: 80),
               child: Column(
                 children: [
                   OutlinedButton(
@@ -99,7 +99,7 @@ class MainHome extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromRGBO(124, 252, 0, 0.7),
+                        color: Colors.lightGreen,
                       ),
                     ),
                   ),
