@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:bonsai_shop/main.dart';
-import 'package:provider/provider.dart';
-import 'package:bonsai_shop/screens/signup.dart';
+import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:bonsai_shop/homepage.dart';
+import 'package:bonsai_shop/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:bonsai_shop/screens/signup.dart';
 import 'package:bonsai_shop/screens/password.dart';
+import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,188 +15,202 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
+
+  bool loading = false;
+  final _formKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  
+  final _auth = FirebaseAuth.instance;
+
   // show the password or not
   bool _isObscure = true;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void login(){
+    setState(() {
+      loading = true ;
+    });
+    _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text.toString()
+    ).then((value) {
+      Utils().toastMessage(value.user!.email.toString());
+      Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+      setState(() {
+        loading = false ;
+      });
+    }).onError((error, stackTrace) {
+      debugPrint(error.toString());
+      Utils().toastMessage(error.toString());
+      setState(() {
+        loading = false ;
+      });
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // // appBar: AppBar(
-      // //   title: const Text('Login'),
-      // //   backgroundColor: Colors.red,
-      // ),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 60, left: 36, right: 36),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+    return WillPopScope(
+        onWillPop: () async{
+          SystemNavigator.pop();
+          return true;
+        },
+        child: Scaffold(
+         body: Padding(
+           padding: EdgeInsets.only(left: 15, right: 15),
+           child: Center(
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 children: <Widget>[
+                   const Text(
+                     'Đăng nhập',
+                     style: TextStyle(
+                       color: Colors.lightGreen,
+                       fontSize: 25,
+                       fontWeight: FontWeight.bold,
+                     ),
+                   ),
 
-                const SizedBox(
-                  height: 40,
-                ),
+                   const SizedBox(
+                     height: 40,
+                   ),
 
-                // text fiel
-                const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18))
-                        // borderSide: BorderSide(color: Colors.blue, width: .5)
-                        ),
-                    labelText: 'Email',
-                  ),
-                ),
+                   // text fiel
+                   Form(
+                       key: _formKey,
+                       child: Column(
+                         children: [
+                           TextFormField(
+                             controller: emailController,
+                             keyboardType: TextInputType.emailAddress,
 
-                const SizedBox(
-                  height: 20,
-                ),
+                             validator: (value){
+                               if(value!.isEmpty){
+                                 return 'Vui lòng nhập email';
+                               }
+                               return null;
+                             },
+                             decoration: const InputDecoration(
+                               border: OutlineInputBorder(
+                                   borderRadius: BorderRadius.all(const Radius.circular(10))
+                               ),
+                               labelText: 'Email',
+                             ),
+                           ),
+                           const SizedBox(
+                             height: 20,
+                           ),
+                           TextFormField(
+                             keyboardType: TextInputType.text,
+                             controller: passwordController,
 
-                TextField(
-                  obscureText: _isObscure,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(18))
-                    ),
-                    labelText: 'Password',
-                      suffixIcon: IconButton(
-                          icon: Icon(
-                              _isObscure ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          }),
+                             obscureText: _isObscure,
+                             validator: (value){
+                               if(value!.isEmpty){
+                                 return 'Vui lòng nhập mật khẩu';
+                               }
+                               return null;
+                             },
+                             decoration: InputDecoration(
+                               border: const OutlineInputBorder(
+                                   borderRadius:
+                                   BorderRadius.all(Radius.circular(10))),
+                               labelText: 'Mật khẩu',
+                               suffixIcon: IconButton(
+                                   icon: Icon(_isObscure
+                                       ? Icons.visibility
+                                       : Icons.visibility_off),
+                                   onPressed: () {
+                                     setState(() {
+                                       _isObscure = !_isObscure;
+                                     });
+                                   }),
+                             ),
+                           ),
 
-                  ),
-                ),
 
-                const SizedBox(
-                  height: 20,
-                ),
+                         ],
+                       )),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.end,
+                     children: [
+                       TextButton(
+                           onPressed: () {
+                             Navigator.push(context,
+                                 MaterialPageRoute(builder: (_) => const PassWord()));
+                           },
+                           child: const Text(
+                             'Quên mật khẩu?',
+                             style: TextStyle(
+                                 fontSize: 16,
+                                 fontWeight: FontWeight.normal,
+                               color: Colors.lightGreen
+                             ),
+                           )),
+                     ],
+                   ),
 
-                ElevatedButton(
-                  // style: OutlinedButton.styleFrom(minimumSize: Size(320, 50)),
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                            ),
-                        )
-                    ),
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => HomePage()));
-                  },
-                  child: const Text(
-                    'Sign in',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => PassWord()));
-                }, child: const Text('Forgot your password?',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),)),
+                   const SizedBox(height: 20,),
 
-                const SizedBox(
-                  height: 70,
-                ),
+                   AuthButton(
+                       title: 'Đăng nhập',
+                       onTap: (){
+                         if(_formKey.currentState!.validate()){
+                           login();
+                         }
+                       },
+                       loading: loading),
 
-                const Text(
-                  ' - Do sign in with - ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey
-                  ),
-                ),
+                   const SizedBox(height: 20),
 
-                const SizedBox(
-                  height: 15,
-                ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.facebook,
-                        size: 40, color: Colors.indigo,
-                      ),
-                      style:
-                          OutlinedButton.styleFrom(minimumSize: Size(100, 50),
-                            backgroundColor: Colors.white
-                          ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.g_mobiledata,
-                        size: 50,
-                        color: Colors.deepOrange,
-                      ),
-                      style:
-                          OutlinedButton.styleFrom(minimumSize: Size(100, 50),
-                          backgroundColor: Colors.white),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.telegram,
-                        size: 40,
-                        color: Colors.blue,
-                      ),
-                      style:
-                          OutlinedButton.styleFrom(minimumSize: Size(100, 50),
-                          backgroundColor: Colors.white),
-                    ),
-                  ],
-                ),
+                   const SizedBox(
+                     height: 40,
+                   ),
 
-                const SizedBox(
-                  height: 70,
-                ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Do not have an account? ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey
-                      ),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => SignUp()));
-                        },
-                        child: const Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        )),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       const Text(
+                         'Bạn chưa có tài khoản? ',
+                         style: TextStyle(fontSize: 16, color: Colors.grey),
+                       ),
+                       TextButton(
+                           onPressed: () {
+                             Navigator.push(context,
+                                 MaterialPageRoute(builder: (_) => const SignUp()));
+                           },
+                           child: const Text(
+                             'Đăng ký',
+                             style: TextStyle(
+                                 fontSize: 16,
+                                 color: Colors.lightGreen
+                             ),
+                           )),
+                     ],
+                   )
+                 ],
+               )
+           ),
+         ),
 
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+          // This trailing comma makes auto-formatting nicer for build methods.
+        )
+        );
   }
 }

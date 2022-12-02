@@ -1,10 +1,10 @@
 import 'package:bonsai_shop/SliderHome.dart';
 import 'package:bonsai_shop/model/post.dart';
 import 'package:bonsai_shop/screens/AllProducts.dart';
+import 'package:bonsai_shop/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsai_shop/screens/login.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:bonsai_shop/SliderHome.dart';
 import 'package:bonsai_shop/network/data.dart';
 import 'cart.dart';
 
@@ -18,22 +18,14 @@ class Home extends StatefulWidget {
   final Post data;
   const Home({Key? key, required this.data,}) : super(key: key);
 
+
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  // List<Post> postData = [];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   NetworkRequest.fetchPosts().then((dataFromServer) {
-  //     setState(() {
-  //       postData = dataFromServer;
-  //     });
-  //   });
-  // }
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +44,15 @@ class _HomeState extends State<Home> {
                 icon: const Icon(Icons.search)),
             IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const Login()));
+                  auth.signOut().then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const Login()));
+                  }).onError((error, stackTrace) {
+                    Utils().toastMessage(error.toString());
+                  });
                 },
-                icon: const Icon(Icons.person)),
+                icon: const Icon(Icons.output)),
+            SizedBox(width: 10,)
           ],
         ),
         drawer: Drawer(
@@ -81,7 +78,8 @@ class _HomeState extends State<Home> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // SliderHome(data: data.last),
+
+                SliderHome(),
 
 
                 // phân loại
@@ -93,6 +91,8 @@ class _HomeState extends State<Home> {
                     ElevatedButton(onPressed: () {}, child: Text('Bán chạy')),
                   ],
                 ),
+
+
 
 
                 // Sản phẩm bán chạy

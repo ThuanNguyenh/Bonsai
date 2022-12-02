@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List Screens = [
     Home(data: data.last),
-    AllProducts(),
     Orders(),
     Blogs(),
     Profile(),
@@ -42,10 +41,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.storefront),
             label: 'Cửa hàng',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_travel),
-            label: 'Sản phẩm',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.document_scanner),

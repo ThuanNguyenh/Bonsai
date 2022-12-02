@@ -38,7 +38,7 @@ class _OrdersState extends State<Orders> {
                         child: SizedBox.fromSize(
                           size: Size.square(100),
                           child: Image.asset(
-                            'lib/images/start1.jpg',
+                            'lib/images/start2.png',
                             fit: BoxFit.cover,
                             width: 100,
                             height: 100,

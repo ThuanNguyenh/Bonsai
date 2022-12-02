@@ -1,8 +1,19 @@
 import 'package:bonsai_shop/screens/editProfile.dart';
+import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +36,11 @@ class Profile extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       )),
-                  Text(
+                  const Text(
                     'Tài khoản',
                     style: TextStyle(
                         fontSize: 18,
@@ -45,8 +56,8 @@ class Profile extends StatelessWidget {
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 200),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 200),
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Row(
@@ -86,7 +97,7 @@ class Profile extends StatelessWidget {
                               const Text(
                                 'anhthuan.221002@gmail.com',
                                 style:
-                                    TextStyle(fontSize: 15, color: Colors.grey),
+                                TextStyle(fontSize: 15, color: Colors.grey),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -110,8 +121,8 @@ class Profile extends StatelessWidget {
             ],
           ),
           Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: Column(
@@ -126,12 +137,12 @@ class Profile extends StatelessWidget {
                         Container(
                             margin: EdgeInsets.only(left: 20, top: 15),
                             child: (
-                               const Icon(Icons.document_scanner,
-                              color: Colors.grey,
-                              size: 30,
-                            ))),
+                                const Icon(Icons.document_scanner,
+                                  color: Colors.grey,
+                                  size: 30,
+                                ))),
                         Container(
-                          margin: EdgeInsets.only(left: 15, top: 15),
+                          margin: const EdgeInsets.only(left: 15, top: 15),
                           child: const Text(
                             'Quản lý đơn hàng',
                             style: TextStyle(
@@ -143,7 +154,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 5, top: 7),
+                      margin: const EdgeInsets.only(right: 5, top: 7),
                       child: IconButton(onPressed: (){},
                           icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
                     ),
@@ -163,14 +174,14 @@ class Profile extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(left: 20, top: 15),
+                            margin: const EdgeInsets.only(left: 20, top: 15),
                             child: (
                                 const Icon(Icons.key,
                                   color: Colors.grey,
                                   size: 30,
                                 ))),
                         Container(
-                          margin: EdgeInsets.only(left: 15, top: 15),
+                          margin: const EdgeInsets.only(left: 15, top: 15),
                           child: const Text(
                             'Đổi mật khẩu',
                             style: TextStyle(
@@ -182,7 +193,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 5, top: 7),
+                      margin: const EdgeInsets.only(right: 5, top: 7),
                       child: IconButton(onPressed: (){},
                           icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
                     ),
@@ -202,14 +213,14 @@ class Profile extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(left: 20, top: 15),
+                            margin: const EdgeInsets.only(left: 20, top: 15),
                             child: (
                                 const Icon(Icons.language,
                                   color: Colors.grey,
                                   size: 30,
                                 ))),
                         Container(
-                          margin: EdgeInsets.only(left: 15, top: 15),
+                          margin: const EdgeInsets.only(left: 15, top: 15),
                           child: const Text(
                             'Ngôn ngữ',
                             style: TextStyle(
@@ -221,7 +232,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 5, top: 7),
+                      margin: const EdgeInsets.only(right: 5, top: 7),
                       child: IconButton(onPressed: (){},
                           icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
                     ),
@@ -241,14 +252,14 @@ class Profile extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(left: 20, top: 15),
+                            margin: const EdgeInsets.only(left: 20, top: 15),
                             child: (
                                 const Icon(Icons.phone_android,
                                   color: Colors.grey,
                                   size: 30,
                                 ))),
                         Container(
-                          margin: EdgeInsets.only(left: 15, top: 15),
+                          margin: const EdgeInsets.only(left: 15, top: 15),
                           child: const Text(
                             'Hotline',
                             style: TextStyle(
@@ -260,7 +271,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 5, top: 7),
+                      margin: const EdgeInsets.only(right: 5, top: 7),
                       child: IconButton(onPressed: (){},
                           icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
                     ),
@@ -273,38 +284,50 @@ class Profile extends StatelessWidget {
                 ),
 
                 // đăng xuất
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(left: 20, top: 15),
-                            child: (
-                                const Icon(Icons.output_outlined,
-                                  color: Colors.grey,
-                                  size: 30,
-                                ))),
-                        Container(
-                          margin: EdgeInsets.only(left: 15, top: 15),
-                          child: const Text(
-                            'Đăng xuất',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 5, top: 7),
-                      child: IconButton(onPressed: (){},
-                          icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
-                    ),
-                  ],
+
+                InkWell(
+                  onTap: () {
+                    auth.signOut().then((value) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => const Login()));
+                    }).onError((error, stackTrace) {
+                      Utils().toastMessage(error.toString());
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              margin: const EdgeInsets.only(left: 20, top: 15),
+                              child: (
+                                  const Icon(Icons.output_outlined,
+                                    color: Colors.grey,
+                                    size: 30,
+                                  ))),
+                          Container(
+                            margin: const EdgeInsets.only(left: 15, top: 15),
+                            child: const Text(
+                              'Đăng xuất',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18),
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 5, top: 7),
+                        child: IconButton(onPressed: (){},
+                            icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
+                      ),
+                    ],
+                  ),
                 )
+
               ],
             ),
           )

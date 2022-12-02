@@ -1,168 +1,182 @@
+import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUp();
+}
+
+class _SignUp extends State<SignUp> {
+  bool loading = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // show the password or not
+  bool _isObscure = true;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Login'),
-      //   backgroundColor: Colors.red,
-      // ),
-      body: ListView(
-        children: [
-          Container(
-            width: 340,
-            margin: const EdgeInsets.only(left: 36, right: 36),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 300, bottom: 50),
-                  child: BackButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
+        centerTitle: true,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(left: 15, right: 15),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Đăng ký',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
 
-                const Text(
-                  'Sign up',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  ),
-                ),
+              const SizedBox(
+                height: 40,
+              ),
 
-                const SizedBox(
-                  height: 40,
-                ),
-
-                // text fiel
-                const TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(18))
-                    ),
-                    labelText: 'Email',
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(18))
-                    ),
-                    labelText: 'Password',
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(18))
-                    ),
-                    labelText: 'Confirm Password',
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-
-                ElevatedButton(
-                  // style: OutlinedButton.styleFrom(minimumSize: Size(320, 50)),
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
+              // text fiel
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Vui lòng nhập email';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.all(const Radius.circular(10))
+                            // borderSide: BorderSide(color: Colors.blue, width: .5)
+                          ),
+                          labelText: 'Email',
                         ),
-                      )
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Login()));
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        controller: passwordController,
+                        obscureText: _isObscure,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Vui lòng nhập mật khẩu';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10))),
+                          labelText: 'Mật khẩu',
+                          suffixIcon: IconButton(
+                              icon: Icon(_isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscure = !_isObscure;
+                                });
+                              }),
+                        ),
+                      ),
+                    ],
+                  )),
+              const SizedBox(
+                height: 40,
+              ),
+
+              AuthButton(
+                  title: 'Đăng ký',
+                  onTap: (){
+                    if(_formKey.currentState!.validate()){
+                      setState(() {
+                        loading = true ;
+                      });
+
+                      _auth.createUserWithEmailAndPassword(
+                          email: emailController.text.toString(),
+                          password: passwordController.text.toString()).then((value) {
+                        setState(() {
+                          loading = false;
+                        });
+                      }).onError((error, stackTrace) {
+                        Utils().toastMessage(error.toString());
+                        setState(() {
+                          loading = false;
+                        });
+                      });
+                    }
                   },
-                  child: const Text(
-                    'Sign up',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                  loading: loading),
+
+
+
+              const SizedBox(
+                height: 40,
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Bạn đã có tài khoản? ',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
-                ),
-
-                const SizedBox(
-                  height: 100,
-                ),
-
-                const Text(
-                  '- Do sign in with -',
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child:
-                          Icon(Icons.facebook, size: 40, color: Colors.indigo),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(100, 50),
-                          backgroundColor: Colors.white),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.g_mobiledata,
-                        size: 50,
-                        color: Colors.deepOrange,
-                      ),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(100, 50),
-                          backgroundColor: Colors.white),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.telegram,
-                        size: 40,
-                        color: Colors.blue,
-                      ),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(100, 50),
-                          backgroundColor: Colors.white),
-                    )
-                  ],
-                ),
-
-                const SizedBox(
-                  height: 100,
-                ),
-              ],
-            ),
-          )
-        ],
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => const Login()));
+                      },
+                      child: const Text(
+                        'Đăng nhập',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.lightGreen
+                        ),
+                      )),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
 
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+

@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bonsai_shop/screens/login.dart';
 import 'package:bonsai_shop/homepage.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(ChangeNotifierProvider(
       create: (_) => MainProvider(),
       child: MaterialApp(debugShowCheckedModeBanner: false, home: MainHome())));
@@ -14,7 +17,7 @@ class MainProvider extends ChangeNotifier {}
 class MainHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: Container(
         child: Stack(
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +27,7 @@ class MainHome extends StatelessWidget {
               child: Image.asset(
                 'lib/images/start1.jpg',
                 fit: BoxFit.fill,
-                color: Color.fromRGBO(156, 156, 156, 1),
+                color: const Color.fromRGBO(156, 156, 156, 1),
                 colorBlendMode: BlendMode.modulate,
                 width: double.infinity,
                 height: 900,
@@ -59,31 +62,9 @@ class MainHome extends StatelessWidget {
 
             // content
             Container(
-              margin: const EdgeInsets.only(top: 550, left: 100, right: 80),
+              margin: const EdgeInsets.only(top: 700, left: 100, right: 80),
               child: Column(
                 children: [
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      backgroundColor: Color.fromRGBO(156, 156, 156, 0.8),
-                      minimumSize: Size(200, 45),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => HomePage()));
-                    },
-                    child: const Text(
-                      'Get Stated',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       shape: StadiumBorder(),
