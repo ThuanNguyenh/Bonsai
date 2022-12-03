@@ -1,4 +1,4 @@
-import 'package:bonsai_shop/splash_services.dart';
+import 'package:bonsai_shop/screens/introls/splash_services.dart';
 import 'package:flutter/material.dart';
 
 

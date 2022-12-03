@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/screens/auth/login.dart';
 import 'package:bonsai_shop/homepage.dart';
 
 void main() async{

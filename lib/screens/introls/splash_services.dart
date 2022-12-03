@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:bonsai_shop/main.dart';
-import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/screens/auth/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

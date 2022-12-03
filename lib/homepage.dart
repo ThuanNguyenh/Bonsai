@@ -1,13 +1,13 @@
 import 'package:bonsai_shop/model/post.dart';
 import 'package:bonsai_shop/model/post.dart';
 import 'package:bonsai_shop/network/data.dart';
-import 'package:bonsai_shop/screens/AllProducts.dart';
-import 'package:bonsai_shop/screens/Blogs.dart';
-import 'package:bonsai_shop/screens/Orders.dart';
+import 'package:bonsai_shop/screens/products/AllProducts.dart';
+import 'package:bonsai_shop/screens/blog/Blogs.dart';
+import 'package:bonsai_shop/screens/products/Orders.dart';
 import 'package:flutter/material.dart';
-import 'package:bonsai_shop/screens/home.dart';
-import 'package:bonsai_shop/screens/cart.dart';
-import 'package:bonsai_shop/screens/profile.dart';
+import 'package:bonsai_shop/screens/home/home.dart';
+import 'package:bonsai_shop/screens/products/productDetail.dart';
+import 'package:bonsai_shop/screens/accounts/profile.dart';
 import 'package:bonsai_shop/model/post.dart';
 import 'model/post.dart';
 

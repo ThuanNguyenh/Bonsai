@@ -3,8 +3,8 @@ import 'package:bonsai_shop/homepage.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bonsai_shop/screens/signup.dart';
-import 'package:bonsai_shop/screens/password.dart';
+import 'package:bonsai_shop/screens/auth/signup.dart';
+import 'package:bonsai_shop/screens/auth/password.dart';
 import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {

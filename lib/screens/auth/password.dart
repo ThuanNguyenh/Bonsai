@@ -1,6 +1,6 @@
 
 
-import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 
 class PassWord extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:bonsai_shop/buttons/auth_button.dart';
-import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/screens/auth/login.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,5 +1,6 @@
-import 'package:bonsai_shop/screens/editProfile.dart';
-import 'package:bonsai_shop/screens/login.dart';
+import 'package:bonsai_shop/screens/accounts/editProfile.dart';
+import 'package:bonsai_shop/screens/auth/login.dart';
+import 'package:bonsai_shop/screens/blog/upload_image.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -128,37 +129,42 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 // quản lý đơn hàng
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(left: 20, top: 15),
-                            child: (
-                                const Icon(Icons.document_scanner,
-                                  color: Colors.grey,
-                                  size: 30,
-                                ))),
-                        Container(
-                          margin: const EdgeInsets.only(left: 15, top: 15),
-                          child: const Text(
-                            'Quản lý đơn hàng',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 5, top: 7),
-                      child: IconButton(onPressed: (){},
-                          icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
-                    ),
-                  ],
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => UploadImages()));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20, top: 15),
+                              child: (
+                                  const Icon(Icons.document_scanner,
+                                    color: Colors.grey,
+                                    size: 30,
+                                  ))),
+                          Container(
+                            margin: const EdgeInsets.only(left: 15, top: 15),
+                            child: const Text(
+                              'Quản lý đơn hàng',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18),
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 5, top: 7),
+                        child: IconButton(onPressed: (){},
+                            icon: const Icon(Icons.navigate_next, color: Colors.grey, size: 30,)),
+                      ),
+                    ],
+                  ),
                 ),
                 const Divider(
                   endIndent: 20,

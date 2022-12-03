@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 // chi tiêts sản phẩm
 
 
-class Cart extends StatefulWidget {
+class ProductDetail extends StatefulWidget {
   final Post? data;
-  const Cart({Key? key, required this.data}) : super(key: key);
+  const ProductDetail({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<Cart> createState() => _CartState();
+  State<ProductDetail> createState() => _ProductDetailState();
 }
 
-class _CartState extends State<Cart> {
+class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
