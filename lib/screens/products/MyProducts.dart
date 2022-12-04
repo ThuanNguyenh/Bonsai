@@ -1,5 +1,4 @@
-import 'package:bonsai_shop/buttons/auth_button.dart';
-import 'package:bonsai_shop/screens/blog/add_blogs.dart';
+import 'package:bonsai_shop/screens/products/addMyProducts.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -38,7 +37,7 @@ class _BlogsState extends State<Blogs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sản phẩm mới'),
+        title: const Text('Sản phẩm của tôi'),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.lightGreen,
@@ -48,29 +47,17 @@ class _BlogsState extends State<Blogs> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: AuthButton(
-                title: 'Thêm sản phẩm',
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const AddBlogs()));
-                },
-                loading: loading),
-          ),
+          const SizedBox(height: 15,),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 10,
+              horizontal: 10, vertical: 10
             ),
             child: TextFormField(
               controller: searchFilter,
               decoration: const InputDecoration(
                   hintText: 'Tìm kiếm',
                   hintStyle: TextStyle(fontSize: 16),
-                  suffixIcon: Icon(
-                    Icons.search_outlined,
-                    color: Colors.lightGreen,
-                  ),
+                  prefixIcon: Icon(Icons.search),
                   focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.lightGreen, width: 2),
@@ -328,9 +315,20 @@ class _BlogsState extends State<Blogs> {
                     child: CircularProgressIndicator(),
                   ))),
           const SizedBox(
-            height: 30,
+            height: 50,
           )
         ],
+      ),
+
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 60),
+        child: FloatingActionButton(
+          backgroundColor: Colors.lightGreen,
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const AddBlogs()));
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

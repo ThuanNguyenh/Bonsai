@@ -44,26 +44,41 @@ class _AllProductsState extends State<AllProducts> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            child: TextFormField(
-              controller: searchFilter,
-              decoration: InputDecoration(
-                  focusColor: Colors.lightGreen,
-                  hintText: 'Tìm kiếm',
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:
-                        const BorderSide(color: Colors.lightGreen, width: 2),
-                  ),
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)))),
-              onChanged: (String value) {
-                setState(() {});
-              },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius:const BorderRadius.all(Radius.circular(10)),
+                boxShadow:const [
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(3.0, 3.0),
+                    blurRadius: 1.0,
+                    spreadRadius: 1.0,
+
+                  )
+                ]
+              ),
+              child: TextFormField(
+                controller: searchFilter,
+                decoration: InputDecoration(
+                    focusColor: Colors.lightGreen,
+                    hintText: 'Tìm kiếm',
+                    prefixIcon: const Icon(Icons.search_outlined),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                      const BorderSide(color: Colors.lightGreen, width: 2),
+                    ),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+                onChanged: (String value) {
+                  setState(() {});
+                },
+              ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+
 
 
           Expanded(
@@ -90,7 +105,7 @@ class _AllProductsState extends State<AllProducts> {
                           gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisExtent: 270,
+                              mainAxisExtent: 290,
                               mainAxisSpacing: 20),
                           itemBuilder: (context, index) {
                             return InkWell(
@@ -146,8 +161,7 @@ class _AllProductsState extends State<AllProducts> {
                                       ),
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 5),
+                                      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 7),
                                       child: Text(
                                         list[index]['address'],
                                         style: const TextStyle(
@@ -166,11 +180,12 @@ class _AllProductsState extends State<AllProducts> {
                                             child: Text(
                                               '${list[index]['price']} đ',
                                               style: const TextStyle(
+                                                color: Colors.lightGreen,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 18),
                                             ),
                                           ),
-                                          const Icon(Icons.favorite_border)
+                                          const Icon(Icons.favorite_border, color: Colors.lightGreen,)
                                         ],
                                       ),
                                     )
@@ -261,7 +276,8 @@ class _AllProductsState extends State<AllProducts> {
                                               '${list[index]['price']} đ',
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18),
+                                                  fontSize: 18,
+                                              ),
                                             ),
                                           ),
                                           const Icon(Icons.favorite_border)

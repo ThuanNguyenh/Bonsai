@@ -2,7 +2,7 @@ import 'package:bonsai_shop/model/post.dart';
 import 'package:bonsai_shop/model/post.dart';
 import 'package:bonsai_shop/network/data.dart';
 import 'package:bonsai_shop/screens/products/AllProducts.dart';
-import 'package:bonsai_shop/screens/blog/Blogs.dart';
+import 'package:bonsai_shop/screens/products/MyProducts.dart';
 import 'package:bonsai_shop/screens/products/Orders.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsai_shop/screens/home/home.dart';

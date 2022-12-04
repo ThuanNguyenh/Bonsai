@@ -108,6 +108,7 @@ class _AddBlogsState extends State<AddBlogs> {
                       children: [
                         TextFormField(
                           maxLines: 1,
+                          maxLength: 15,
                           controller: nameController,
                           validator: (value){
                             if(value!.isEmpty){
@@ -163,11 +164,12 @@ class _AddBlogsState extends State<AddBlogs> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
 
                         TextFormField(
                           maxLines: 1,
                           controller: priceController,
+                          keyboardType: TextInputType.phone,
                           validator: (value){
                             if(value!.isEmpty){
                               return 'Hãy nhập nội dung !';
@@ -193,7 +195,7 @@ class _AddBlogsState extends State<AddBlogs> {
                           ),
                         ),
 
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
 
                         TextFormField(
                           maxLines: 1,

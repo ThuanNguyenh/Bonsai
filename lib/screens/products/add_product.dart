@@ -54,7 +54,7 @@ class _AddProductsState extends State<AddProducts> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             const SizedBox(height: 15,),
@@ -83,41 +83,6 @@ class _AddProductsState extends State<AddProducts> {
                 ),
                 const SizedBox(height: 40,),
 
-                // AuthButton(
-                //     title: 'Upload',
-                //     onTap: ()async{
-                //
-                //       setState(() {
-                //         loading = true;
-                //       });
-                //
-                //       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref(
-                //           '/foldername/${DateTime.now().millisecondsSinceEpoch}');
-                //       firebase_storage.UploadTask uploadTask = ref.putFile(_image!.absolute);
-                //
-                //       await Future.value(uploadTask);
-                //       var newUrl = await ref.getDownloadURL();
-                //
-                //       databaseRef.child('1').set({
-                //         'id': '1212',
-                //         'title' : newUrl.toString()
-                //       }).then((value) {
-                //         Utils().toastMessage('Uploaded!');
-                //         setState(() {
-                //           loading = false;
-                //         });
-                //       }).onError((error, stackTrace) {
-                //         Utils().toastMessage(error.toString());
-                //         setState(() {
-                //           loading = false;
-                //         });
-                //       });
-                //
-                //
-                //
-                //     },
-                //     loading: loading
-                // )
               ],
             ),
 
