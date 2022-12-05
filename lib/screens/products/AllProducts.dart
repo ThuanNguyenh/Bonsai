@@ -101,6 +101,7 @@ class _AllProductsState extends State<AllProducts> {
                     if (searchFilter.text.isEmpty) {
                       return GridView.builder(
                           physics: const ScrollPhysics(),
+
                           itemCount: snapshot.data!.snapshot.children.length,
                           gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -109,17 +110,9 @@ class _AllProductsState extends State<AllProducts> {
                               mainAxisSpacing: 20),
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => ProductDetail(
-                                          data: list[index],
-                                        )));
-                              },
                               child: Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 10),
+                                const EdgeInsets.symmetric(horizontal: 10,),
                                 decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
@@ -137,19 +130,28 @@ class _AllProductsState extends State<AllProducts> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Container(
-                                      margin: const EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                        child: SizedBox.fromSize(
-                                            size: const Size.square(170),
-                                            child: Image.network(
-                                              list[index]['url'],
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                            )),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => ProductDetail()));
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.all(5),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                          child: SizedBox.fromSize(
+                                              size: const Size.square(170),
+                                              child: Image.network(
+                                                list[index]['url'],
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                              )),
+                                        ),
                                       ),
                                     ),
+
                                     Container(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
@@ -185,7 +187,7 @@ class _AllProductsState extends State<AllProducts> {
                                                   fontSize: 18),
                                             ),
                                           ),
-                                          const Icon(Icons.favorite_border, color: Colors.lightGreen,)
+                                          const Icon(Icons.favorite_border, color: Colors.red,)
                                         ],
                                       ),
                                     )
@@ -207,11 +209,6 @@ class _AllProductsState extends State<AllProducts> {
                           ),
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (_) => ProductDetail(data: list[index],
-                                    )));
-                              },
                               child: Container(
                                 margin:
                                 const EdgeInsets.symmetric(horizontal: 10),
@@ -232,19 +229,26 @@ class _AllProductsState extends State<AllProducts> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Container(
-                                      margin: const EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                        child: SizedBox.fromSize(
-                                            size: const Size.square(170),
-                                            child: Image.network(
-                                              list[index]['url'],
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                            )),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(
+                                            builder: (_) => ProductDetail()));
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.all(5),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                          child: SizedBox.fromSize(
+                                              size: const Size.square(170),
+                                              child: Image.network(
+                                                list[index]['url'],
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                              )),
+                                        ),
                                       ),
                                     ),
+
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                       child: Text(
@@ -277,10 +281,11 @@ class _AllProductsState extends State<AllProducts> {
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 18,
+                                                color: Colors.lightGreen
                                               ),
                                             ),
                                           ),
-                                          const Icon(Icons.favorite_border)
+                                          const Icon(Icons.favorite_border, color: Colors.red,)
                                         ],
                                       ),
                                     )

@@ -45,19 +45,15 @@ class _SignUp extends State<SignUp> {
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 100, left: 15, right: 15),
+            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    'Bonsai Shop',
-                    style: TextStyle(
-                      color: Colors.lightGreen,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Container(
+                    height: 150,
+                    child: Image.asset('lib/images/logo.png'),
                   ),
 
                   const SizedBox(
@@ -172,7 +168,10 @@ class _SignUp extends State<SignUp> {
                             ),
                           )),
                     ],
-                  )
+                  ),
+
+
+
                 ],
               ),
             ),

@@ -1,19 +1,18 @@
+import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class SliderHome extends StatefulWidget {
-  const SliderHome({Key? key}) : super(key: key);
+class Filter extends StatefulWidget {
+  const Filter({Key? key}) : super(key: key);
 
   @override
-  State<SliderHome> createState() => _SliderHomeState();
+  State<Filter> createState() => _FilterState();
 }
 
-class _SliderHomeState extends State<SliderHome> {
-  final ref = FirebaseDatabase.instance.ref('Image');
-  final searchFilter = TextEditingController();
+class _FilterState extends State<Filter> {
+  final ref = FirebaseDatabase.instance.ref('Post');
 
   final bool loading = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +38,7 @@ class _SliderHomeState extends State<SliderHome> {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
-
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: SizedBox.fromSize(
-                          size: const Size.square(320),
-                          child: Image.network(
-                            list[index]['image'],
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                          )),
-                    ),
+                    child: Text(list[index]['title']),
                   );
                 });
           }

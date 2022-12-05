@@ -1,4 +1,5 @@
 import 'package:bonsai_shop/screens/products/addMyProducts.dart';
+import 'package:bonsai_shop/screens/products/productDetail.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -102,52 +103,67 @@ class _BlogsState extends State<Blogs> {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               visualDensity: const VisualDensity(
                                   vertical: 4, horizontal: 2),
-                              leading: SizedBox(
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
-                                  child: SizedBox.fromSize(
-                                      size: const Size.square(110),
-                                      child: Image.network(
-                                        snapshot.child('url').value.toString(),
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        // height: 200,
-                                      )),
-                                ),
-                              ),
-                              title: Container(
-                                margin: const EdgeInsets.only(top: 10, bottom: 5),
-                                child: Text(
-                                  snapshot.child('name').value.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.lightGreen,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                ),
-                              ),
-                              subtitle: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 5),
-                                    child: Text(
-                                      '${snapshot.child('address').value.toString()} ',
-                                      style: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
+                              leading: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: SizedBox(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
+                                    child: SizedBox.fromSize(
+                                        size: const Size.square(110),
+                                        child: Image.network(
+                                          snapshot.child('url').value.toString(),
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          // height: 200,
+                                        )),
                                   ),
-                                  Text(
-                                    '${snapshot.child('price').value.toString()} đ',
+                                ),
+                              ),
+                              title: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                                  child: Text(
+                                    snapshot.child('name').value.toString(),
                                     style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600),
-                                  )
-                                ],
+                                        color: Colors.lightGreen,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                              subtitle: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      child: Text(
+                                        '${snapshot.child('address').value.toString()} ',
+                                        style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${snapshot.child('price').value.toString()} đ',
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ],
+                                ),
                               ),
                               isThreeLine: true,
                               trailing: PopupMenuButton(
@@ -161,9 +177,6 @@ class _BlogsState extends State<Blogs> {
 
 
                                             showMyDialog(name, address, price,snapshot.child('id').value.toString());
-
-
-                                          // showMyDialog(name,snapshot.child('id').value.toString());
 
 
 
@@ -220,52 +233,67 @@ class _BlogsState extends State<Blogs> {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               visualDensity: const VisualDensity(
                                   vertical: 4, horizontal: 2),
-                              leading: SizedBox(
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
-                                  child: SizedBox.fromSize(
-                                      size: const Size.square(110),
-                                      child: Image.network(
-                                        snapshot.child('url').value.toString(),
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        // height: 200,
-                                      )),
-                                ),
-                              ),
-                              title: Container(
-                                margin: const EdgeInsets.only(top: 10, bottom: 5),
-                                child: Text(
-                                  snapshot.child('name').value.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.lightGreen,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                ),
-                              ),
-                              subtitle: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 5),
-                                    child: Text(
-                                      '${snapshot.child('address').value.toString()} ',
-                                      style: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
+                              leading: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: SizedBox(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
+                                    child: SizedBox.fromSize(
+                                        size: const Size.square(110),
+                                        child: Image.network(
+                                          snapshot.child('url').value.toString(),
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          // height: 200,
+                                        )),
                                   ),
-                                  Text(
-                                    '${snapshot.child('price').value.toString()} đ',
+                                ),
+                              ),
+                              title: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                                  child: Text(
+                                    snapshot.child('name').value.toString(),
                                     style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600),
-                                  )
-                                ],
+                                        color: Colors.lightGreen,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                              subtitle: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetail()));
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 5),
+                                      child: Text(
+                                        '${snapshot.child('address').value.toString()} ',
+                                        style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${snapshot.child('price').value.toString()} đ',
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ],
+                                ),
                               ),
                               isThreeLine: true,
                               trailing: PopupMenuButton(

@@ -1,5 +1,7 @@
 import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:bonsai_shop/homepage.dart';
+import 'package:bonsai_shop/screens/auth/login_with_phone_number.dart';
+import 'package:bonsai_shop/screens/auth/verify_code.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -69,19 +71,15 @@ class _Login extends State<Login> {
          body: ListView(
            children: [
              Padding(
-               padding: EdgeInsets.only(left: 15, right: 15, top: 100),
+               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 50),
                child: Center(
                    child: Column(
                      mainAxisAlignment: MainAxisAlignment.center,
                      crossAxisAlignment: CrossAxisAlignment.center,
                      children: <Widget>[
-                       const Text(
-                         'Bonsai Shop',
-                         style: TextStyle(
-                           color: Colors.lightGreen,
-                           fontSize: 25,
-                           fontWeight: FontWeight.bold,
-                         ),
+                       Container(
+                         height: 150,
+                         child: Image.asset('lib/images/logo.png'),
                        ),
 
                        const SizedBox(
@@ -181,7 +179,7 @@ class _Login extends State<Login> {
 
 
                        const SizedBox(
-                         height: 40,
+                         height: 30,
                        ),
 
 
@@ -205,6 +203,29 @@ class _Login extends State<Login> {
                                  ),
                                )),
                          ],
+                       ),
+
+                       InkWell(
+                         onTap: (){
+                           Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPhone()));
+                         },
+                         child: Container(
+                           height: 50,
+                           margin: EdgeInsets.only(top: 20),
+                           width: double.maxFinite,
+                           decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(50),
+                             border: Border.all(
+                               color: Colors.lightGreen
+                             )
+                           ),
+                           child:Center(child: Text('Đăng nhập với số điện thoại',
+                           style: TextStyle(
+                             color: Colors.lightGreen,
+                             fontSize: 16
+                           ),)),
+                         ),
+
                        )
                      ],
                    )

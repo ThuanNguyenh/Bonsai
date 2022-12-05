@@ -23,6 +23,7 @@ class _AddBlogsState extends State<AddBlogs> {
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
   final addressController = TextEditingController();
+  final titleController = TextEditingController();
 
 
 
@@ -106,6 +107,38 @@ class _AddBlogsState extends State<AddBlogs> {
                     key: _formKey,
                     child: Column(
                       children: [
+
+                        TextFormField(
+                          maxLines: 1,
+                          maxLength: 15,
+                          controller: titleController,
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return 'Hãy nhập nội dung !';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Loại sản phẩm',
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.lightGreen,
+                                  width: 2
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey,
+                                  width: 1
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 15,),
+
                         TextFormField(
                           maxLines: 1,
                           maxLength: 15,
@@ -254,6 +287,7 @@ class _AddBlogsState extends State<AddBlogs> {
 
                         databaseRef.child(id).set({
                           'id': id,
+                          'title' : titleController.text.toString(),
                           'url': newUrl.toString(),
                           'name': nameController.text.toString(),
                           'description': descriptionController.text.toString(),
@@ -274,7 +308,8 @@ class _AddBlogsState extends State<AddBlogs> {
                         });
                       }
                     },
-                    loading: loading)
+                    loading: loading),
+                SizedBox(height: 60,)
               ],
             ),
           )

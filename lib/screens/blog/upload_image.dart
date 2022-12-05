@@ -23,7 +23,7 @@ class _UploadImagesState extends State<UploadImages> {
   final picker = ImagePicker();
 
   firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
-  DatabaseReference databaseRef = FirebaseDatabase.instance.ref('Post');
+  DatabaseReference databaseRef = FirebaseDatabase.instance.ref('Image');
 
   Future getImageGallery()async{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
@@ -84,9 +84,12 @@ class _UploadImagesState extends State<UploadImages> {
                   await Future.value(uploadTask);
                   var newUrl = await ref.getDownloadURL();
 
-                  databaseRef.child('1').set({
-                    'id': '1212',
-                    'title' : newUrl.toString()
+                  String id = DateTime.now().millisecondsSinceEpoch.toString() ;
+
+
+                  databaseRef.child(id).set({
+                    'id': id,
+                    'image' : newUrl.toString()
                   }).then((value) {
                     Utils().toastMessage('Uploaded!');
                     setState(() {
