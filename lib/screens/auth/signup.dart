@@ -129,6 +129,7 @@ class _SignUp extends State<SignUp> {
                           _auth.createUserWithEmailAndPassword(
                               email: emailController.text.toString(),
                               password: passwordController.text.toString()).then((value) {
+                            Utils().toastMessage('Đăng ký thành công!');
                             setState(() {
                               loading = false;
                             });

@@ -30,7 +30,7 @@ class _ProductDetailState extends State<ProductDetail> {
             children: [
               Container(
                 height: 320,
-                child: Image.asset('lib/images/start1.jpg',
+                child: Image.asset('lib/images/thantai.jpg',
                   fit: BoxFit.fill,
                   width: double.infinity,
                 ),
@@ -52,7 +52,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            'Lan dot bien',
+                            'Thần tài',
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
@@ -70,7 +70,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     Container(
                       padding: const EdgeInsets.only(left: 20),
                       child: const Text(
-                        '150000 d',
+                        '200000 đ',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Colors.grey,
@@ -112,8 +112,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     Container(
                       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: const Text(
-                        'Plant Shop Mobile App designed by Fauzan Ardhiansyah for Enver Studio.'
-                            ' Connect with them on Dribbble; the global community for designers and creative professionals.',
+                        'Cây ngọc ngân còn gọi là cây Valentine, có tên danh pháp là Dieffenbachia Picta, thuộc họ Ráy, thuộc loài thân thảo, có nguồn gốc ở Châu Mỹ nhiệt đới, Trung Mỹ, Brazil,... và ở Đông Nam Á thì cây được trồng nhiều Trung Quốc, Việt Nam,...',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 18,
@@ -121,7 +120,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ),
                     Container(
-                        padding: const EdgeInsets.only(left: 20, right: 20, top: 130),
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),

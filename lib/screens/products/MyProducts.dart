@@ -27,6 +27,7 @@ class _BlogsState extends State<Blogs> {
   final editController = TextEditingController();
   final ePriceController = TextEditingController();
   final eAddressController = TextEditingController();
+  final eImageController = TextEditingController();
 
   @override
   void initState() {

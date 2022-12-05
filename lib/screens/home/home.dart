@@ -5,8 +5,6 @@ import 'package:bonsai_shop/screens/products/typeProduct.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bonsai_shop/screens/auth/login.dart';
-import 'package:bonsai_shop/network/data.dart';
 import '../products/productDetail.dart';
 import 'SliderHome.dart';
 import 'package:firebase_database/firebase_database.dart';
