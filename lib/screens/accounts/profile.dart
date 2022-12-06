@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                         radius: 45,
                         child: ClipOval(
                           child: (Image.asset(
-                            'lib/images/start1.jpg',
+                            'lib/images/avatar.jpg',
                             fit: BoxFit.cover,
                             width: 100,
                             height: 100,

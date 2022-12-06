@@ -1,3 +1,4 @@
+import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:bonsai_shop/network/data.dart';
 import 'package:bonsai_shop/screens/auth/login.dart';
 import 'package:flutter/material.dart';
@@ -14,34 +15,36 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+
+  final bool loading = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.white,
-        foregroundColor: Colors.lightGreen[900],
+        foregroundColor: Colors.lightGreen,
         title: const Text('Chi tiết sản phẩm'),
         centerTitle: true,
       ),
       body: ListView(
         children: [
-          Stack(
+          Column(
             children: [
               Container(
-                height: 320,
+                width: double.infinity,
                 child: Image.asset('lib/images/thantai.jpg',
                   fit: BoxFit.fill,
                   width: double.infinity,
                 ),
               ),
               Container(
-                height: 465,
                 width: double.infinity,
-                margin: const EdgeInsets.only(top: 300),
                 decoration:const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +53,8 @@ class _ProductDetailState extends State<ProductDetail> {
                       padding: const EdgeInsets.all(20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
+                        children: const [
+                          Text(
                             'Thần tài',
                             style: TextStyle(
                               fontSize: 20,
@@ -59,7 +62,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.favorite_border,
                             size: 30,
                             color: Colors.grey,
@@ -119,28 +122,16 @@ class _ProductDetailState extends State<ProductDetail> {
                         ),
                       ),
                     ),
-                    Container(
-                        padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            backgroundColor: Colors.lightGreen,
-                            minimumSize: const Size(400, 45),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (_) => const Login()));
-                          },
-                          child: const Text(
-                            'Thêm vào giỏ hàng',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                      child: AuthButton(
+                          title: 'Thêm vào giỏ hàng',
+                          onTap: (){},
+                          loading: loading
+                      ),
                     )
+
                   ],
                 ),
               )

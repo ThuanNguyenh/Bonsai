@@ -50,25 +50,43 @@ class _BlogsState extends State<Blogs> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15,),
+
+          // search
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10, vertical: 10
             ),
-            child: TextFormField(
-              controller: searchFilter,
-              decoration: const InputDecoration(
-                  hintText: 'Tìm kiếm',
-                  hintStyle: TextStyle(fontSize: 16),
-                  prefixIcon: Icon(Icons.search),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.lightGreen, width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)))),
-              onChanged: (String value) {
-                setState(() {});
-              },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius:BorderRadius.all(Radius.circular(10)),
+                  boxShadow:[
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 5.0,
+
+                    )
+                  ]
+              ),
+              child: TextFormField(
+                controller: searchFilter,
+                decoration: InputDecoration(
+                    hintText: 'Tìm kiếm',
+                    hintStyle: TextStyle(fontSize: 16, color: Colors.lightGreen[900]),
+                    prefixIcon: Icon(Icons.search, color: Colors.lightGreen[900],),
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Colors.lightGreen, width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    border: InputBorder.none,
+                  fillColor: Colors.white,
+                  filled: true
+                ),
+                onChanged: (String value) {
+                  setState(() {});
+                },
+              ),
             ),
           ),
           Expanded(

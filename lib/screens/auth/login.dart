@@ -1,12 +1,11 @@
 import 'package:bonsai_shop/buttons/auth_button.dart';
 import 'package:bonsai_shop/homepage.dart';
 import 'package:bonsai_shop/screens/auth/login_with_phone_number.dart';
-import 'package:bonsai_shop/screens/auth/verify_code.dart';
 import 'package:bonsai_shop/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsai_shop/screens/auth/signup.dart';
-import 'package:bonsai_shop/screens/auth/password.dart';
+import 'package:bonsai_shop/screens/auth/forgot_password.dart';
 import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {
@@ -106,6 +105,11 @@ class _Login extends State<Login> {
                                        borderRadius: BorderRadius.all(const Radius.circular(10))
                                    ),
                                    labelText: 'Email',
+                                   prefixIcon: Icon(Icons.email),
+                                   focusedBorder: OutlineInputBorder(
+                                     borderRadius: BorderRadius.all(Radius.circular(10)),
+                                     borderSide: BorderSide(color: Colors.lightGreen)
+                                   )
                                  ),
                                ),
                                const SizedBox(
@@ -122,20 +126,16 @@ class _Login extends State<Login> {
                                    }
                                    return null;
                                  },
-                                 decoration: InputDecoration(
-                                   border: const OutlineInputBorder(
-                                       borderRadius:
-                                       BorderRadius.all(Radius.circular(10))),
-                                   labelText: 'Mật khẩu',
-                                   suffixIcon: IconButton(
-                                       icon: Icon(_isObscure
-                                           ? Icons.visibility
-                                           : Icons.visibility_off),
-                                       onPressed: () {
-                                         setState(() {
-                                           _isObscure = !_isObscure;
-                                         });
-                                       }),
+                                 decoration: const InputDecoration(
+                                     border: OutlineInputBorder(
+                                         borderRadius: BorderRadius.all(const Radius.circular(10))
+                                     ),
+                                     labelText: 'Mật khẩu',
+                                     prefixIcon: Icon(Icons.key),
+                                     focusedBorder: OutlineInputBorder(
+                                         borderRadius: BorderRadius.all(Radius.circular(10)),
+                                         borderSide: BorderSide(color: Colors.lightGreen)
+                                     )
                                  ),
                                ),
 
@@ -151,7 +151,7 @@ class _Login extends State<Login> {
                            TextButton(
                                onPressed: () {
                                  Navigator.push(context,
-                                     MaterialPageRoute(builder: (_) => const PassWord()));
+                                     MaterialPageRoute(builder: (_) => const ForgotPassword()));
                                },
                                child: const Text(
                                  'Quên mật khẩu?',

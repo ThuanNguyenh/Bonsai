@@ -79,6 +79,50 @@ class _HomeState extends State<Home> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+
+                // Search
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius:BorderRadius.all(Radius.circular(10)),
+                        boxShadow:[
+                          BoxShadow(
+                            color: Colors.grey.shade300,
+                            offset: Offset(3.0, 3.0),
+                            blurRadius: 10.0,
+                            spreadRadius: 5.0,
+
+                          )
+                        ]
+                    ),
+                    child: TextFormField(
+                      // controller: searchFilter,
+
+                      decoration: InputDecoration(
+
+                        focusColor: Colors.lightGreen,
+                        hintText: 'Tìm kiếm',
+                        hintStyle: TextStyle(color: Colors.lightGreen[900]),
+                        prefixIcon: Icon(Icons.search_outlined, color: Colors.lightGreen[900],),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                          const BorderSide(color: Colors.lightGreen, width: 2),
+                        ),
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+
+
+                      ),
+                      onChanged: (String value) {
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ),
+
                 // banner
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -103,7 +147,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
 
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 //
                 // // lọc
                 // Container(

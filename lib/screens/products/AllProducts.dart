@@ -43,17 +43,16 @@ class _AllProductsState extends State<AllProducts> {
         children: [
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius:const BorderRadius.all(Radius.circular(10)),
-                boxShadow:const [
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
                   BoxShadow(
-                    color: Colors.white,
+                    color: Colors.grey.shade300,
                     offset: Offset(3.0, 3.0),
-                    blurRadius: 1.0,
-                    spreadRadius: 1.0,
+                    blurRadius: 10.0,
+                    spreadRadius: 5.0,
 
                   )
                 ]
@@ -63,14 +62,17 @@ class _AllProductsState extends State<AllProducts> {
                 decoration: InputDecoration(
                     focusColor: Colors.lightGreen,
                     hintText: 'Tìm kiếm',
-                    prefixIcon: const Icon(Icons.search_outlined),
+                    hintStyle: TextStyle(color: Colors.lightGreen[900]),
+                    prefixIcon: Icon(Icons.search_outlined, color: Colors.lightGreen[900],),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
                       const BorderSide(color: Colors.lightGreen, width: 2),
                     ),
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+
+                    border: InputBorder.none,
+                  fillColor: Colors.white,
+                  filled: true
                 ),
                 onChanged: (String value) {
                   setState(() {});
@@ -204,7 +206,7 @@ class _AllProductsState extends State<AllProducts> {
                           gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisExtent: 270,
+                              mainAxisExtent: 290,
                               mainAxisSpacing: 20
                           ),
                           itemBuilder: (context, index) {
@@ -299,7 +301,8 @@ class _AllProductsState extends State<AllProducts> {
                     }
                   }
                 },
-              )),
+              ),
+          ),
           const SizedBox(height: 10,)
 
 
